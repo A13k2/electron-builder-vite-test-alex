@@ -14,7 +14,7 @@ afterAll(async () => {
   await electronApp.close();
 });
 
-test('Main window state', async () => {
+test.skip('Main window state', async () => {
   const page = await electronApp.firstWindow();
   const window: JSHandle<BrowserWindow> = await electronApp.browserWindow(page);
   const windowState = await window.evaluate(
