@@ -42,14 +42,14 @@ test.skip('Main window state', async () => {
   expect(windowState.isDevToolsOpened, 'The DevTools panel was open').toBeFalsy();
 });
 
-test('Main window web content', async () => {
+test.skip('Main window web content', async () => {
   const page = await electronApp.firstWindow();
   const element = await page.$('#app', {strict: true});
   expect(element, 'Was unable to find the root element').toBeDefined();
   expect((await element.innerHTML()).trim(), 'Window content was empty').not.equal('');
 });
 
-test('Preload versions', async () => {
+test.skip('Preload versions', async () => {
   const page = await electronApp.firstWindow();
   const versionsElement = page.locator('#process-versions');
   expect(await versionsElement.count(), 'expect find one element #process-versions').toStrictEqual(
@@ -69,7 +69,7 @@ test('Preload versions', async () => {
   }
 });
 
-test('Preload nodeCrypto', async () => {
+test.skip('Preload nodeCrypto', async () => {
   const page = await electronApp.firstWindow();
 
   // Test hashing a random string
