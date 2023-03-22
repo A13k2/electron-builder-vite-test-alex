@@ -4,7 +4,10 @@ import {restoreOrCreateWindow} from '/@/mainWindow';
 import {platform} from 'node:process';
 import log from 'electron-log';
 import {autoUpdater} from 'electron-updater';
+import {SerialPort} from 'serialport';
 log.info('App starting...');
+const ports = SerialPort.list();
+log.info('serial ports', ports);
 /**
  * Prevent electron from running multiple instances.
  */
