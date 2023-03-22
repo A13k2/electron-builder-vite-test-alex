@@ -3,6 +3,7 @@ import './security-restrictions';
 import {restoreOrCreateWindow} from '/@/mainWindow';
 import {platform} from 'node:process';
 import log from 'electron-log';
+log.info('App starting...');
 /**
  * Prevent electron from running multiple instances.
  */
@@ -65,17 +66,20 @@ app
  * Like `npm run compile` does. It's ok 😅
  */
 if (import.meta.env.PROD) {
+  log.info('Check for updates... (Prod mode)');
   app
     .whenReady()
     .then(() => import('electron-updater'))
     .then(module => {
+      log.info('loaded electron-updater module');
       const autoUpdater =
         module.autoUpdater ||
         // @ts-expect-error Hotfix for https://github.com/electron-userland/electron-builder/issues/7338
         (module.default.autoUpdater as typeof module['autoUpdater']);
       log.transports.file.level = 'info';
       autoUpdater.logger = log;
+      log.info('added logger for updates');
       return autoUpdater.checkForUpdatesAndNotify();
     })
-    .catch(e => console.error('Failed check and install updates:', e));
+    .catch(e => log.error('Failed check and install updates:', e));
 }
